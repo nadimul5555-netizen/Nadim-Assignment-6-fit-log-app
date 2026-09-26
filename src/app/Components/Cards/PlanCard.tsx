@@ -11,9 +11,11 @@ import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import { toast } from "react-toastify";
 
+export interface PlanProps{
+ SortedPlan:LibraryType[] 
+}
 
-
-const PlanCard = () => {
+const PlanCard = ({SortedPlan}:PlanProps) => {
   const {plan,setPlan}:StateTypes=useContext(PlaneContext)
    const [done,setDone]=useState<number[]>([])
 
@@ -32,8 +34,8 @@ const onRemove=(Data:LibraryType)=>{
     return (
     <div className=" container mx-auto">
       {
-        plan.map((Data:LibraryType,ind:number)=>(
-          <div key={ind} className="my-3 flex items-center gap-4 rounded-xl border border-[#242833] bg-[#14161d] p-3">
+        SortedPlan.map((Data:LibraryType)=>(
+          <div key={Data.id} className="my-3 flex items-center gap-4 rounded-xl border border-[#242833] bg-[#14161d] p-3">
       
      
       <Image

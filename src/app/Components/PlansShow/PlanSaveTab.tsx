@@ -4,13 +4,42 @@ import CalculatePlan from './Calculate';
 import CalculateSaved from './CalculateSaved';
 import PlanCard from '../Cards/PlanCard';
 import SavedCard from '../Cards/SavedCard';
-import { StateTypes } from '@/app/AllDataType';
+import { LibraryType, StateTypes } from '@/app/AllDataType';
 import { PlaneContext } from '@/app/Context/page';
 import NothingHere from '../Cards/NothingHere';
 
 const PlanSaveTab = () => {
     const [activeTab, setActiveTab] = useState("today");
-       const {plan,saved}:StateTypes=useContext(PlaneContext);
+       const {plan,saved,setPlan,setSaved}:StateTypes=useContext(PlaneContext);
+       const [sort,setSort]=useState<"duration"|"calories"|"rating">('calories')
+
+
+const handleSorted=(values:LibraryType[])=>{
+  const newSorted = [...values];
+
+  if(sort === "duration"){
+    newSorted.sort((a ,b)=> b.duration -a.duration)
+  }else if(sort === "calories"){
+    newSorted.sort((a ,b)=> b.caloriesBurned - a.caloriesBurned );
+  }else if(sort === "rating"){
+    newSorted.sort((a,b)=> b.rating - a.rating)
+  }
+  return newSorted
+
+
+}
+
+const SortedPlan:LibraryType[] =handleSorted(plan);
+const SortedSaved:LibraryType[] =handleSorted(saved);
+console.log(
+  SortedPlan.map(item => ({
+    name: item.name,
+    duration: item.duration,
+    calories: item.caloriesBurned,
+    rating: item.rating
+  }))
+);
+
   return (
     <div>
 
@@ -53,12 +82,21 @@ const PlanSaveTab = () => {
 
     </div>
     <div className=' flex justify-end'>
-      
+      <label className='m-2'>Sort by</label>
+      <select 
+      value={sort}
+      onChange={(e)=> setSort(e.target.value as "duration"|"calories"|"rating")}
+      className="select appearance-none bg-[#252938] flex w-fit">
+  
+  <option value={"duration"}>Duration</option>
+  <option value={"calories"}>Calories</option>
+  <option value={"rating"}>Rating</option>
+</select>
     </div>
         </div>
         <div>
           {
-            activeTab === "today"?  plan.length >0? <PlanCard></PlanCard>:<NothingHere></NothingHere>:saved.length>0?<SavedCard></SavedCard>:<NothingHere></NothingHere>
+            activeTab === "today"?  SortedPlan.length >0? <PlanCard SortedPlan={SortedPlan}></PlanCard>:<NothingHere></NothingHere>:SortedSaved.length>0?<SavedCard SortedSaved={SortedSaved}></SavedCard>:<NothingHere></NothingHere>
           }
         </div>
     </div>

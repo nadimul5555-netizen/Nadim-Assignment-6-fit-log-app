@@ -11,9 +11,13 @@ import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import { toast } from "react-toastify";
 
+export interface SavedProps {
+  SortedSaved:LibraryType[];
+}
 
 
-const  SavedCard = () => {
+
+const  SavedCard = ({SortedSaved}:SavedProps) => {
   const {saved,setSaved}:StateTypes=useContext(PlaneContext)
   const [done,setDone]=useState<number[]>([])
 
@@ -35,8 +39,8 @@ const handleDone=(id:number)=>{
     return (
     <div className=" container mx-auto">
       {
-        saved.map((Data:LibraryType,ind:number)=>(
-          <div key={ind} className=" my-3 flex items-center gap-4 rounded-xl border border-[#242833] bg-[#14161d] p-3">
+        SortedSaved.map((Data:LibraryType)=>(
+          <div key={Data.id} className=" my-3 flex items-center gap-4 rounded-xl border border-[#242833] bg-[#14161d] p-3">
       
      
       <Image
