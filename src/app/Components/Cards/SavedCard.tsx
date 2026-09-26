@@ -9,17 +9,26 @@ import { GiBurningDot } from "react-icons/gi";
 import { IoIosTimer } from "react-icons/io";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
+import { toast } from "react-toastify";
 
 
 
 const  SavedCard = () => {
   const {saved,setSaved}:StateTypes=useContext(PlaneContext)
-  const [done,setDone]=useState<boolean>(true)
+  const [done,setDone]=useState<number[]>([])
 
 const onRemove=(Data:LibraryType)=>{
   const afterRemove = saved.filter(data=> data.id !== Data.id)
   setSaved(afterRemove)
+  toast.error(`${Data.name} removed successfully !`)
 }
+
+const handleDone=(id:number)=>{
+  setDone([...done,id])
+  
+}
+
+
   
   
  
@@ -27,7 +36,7 @@ const onRemove=(Data:LibraryType)=>{
     <div className=" container mx-auto">
       {
         saved.map((Data:LibraryType,ind:number)=>(
-          <div key={ind} className="flex items-center gap-4 rounded-xl border border-[#242833] bg-[#14161d] p-3">
+          <div key={ind} className=" my-3 flex items-center gap-4 rounded-xl border border-[#242833] bg-[#14161d] p-3">
       
      
       <Image
@@ -67,12 +76,12 @@ const onRemove=(Data:LibraryType)=>{
         </button></Link>
 
         {
-          done === true? <button
-          onClick={()=> setDone(false) }
+          done.includes(Data.id)? '':<button
+          onClick={()=> handleDone(Data.id) }
           className="rounded-full bg-[#baff00] flex gap-1  px-4 py-1.5 text-[10px] font-semibold text-black transition hover:bg-[#a9ed00]"
         >
          <IoCheckmarkDoneSharp className="mt-0.5" /> Mark as Done
-        </button>:''
+        </button>
         }
 
         <button
