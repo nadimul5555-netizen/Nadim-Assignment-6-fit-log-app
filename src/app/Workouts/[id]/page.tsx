@@ -15,6 +15,7 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
   const { id } = await params;
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${id}`);
   const Data: LibraryType = await res.json();
+  console.log('data',Data)
 
   return (
     <div className="container mx-auto my-10 grid grid-cols-1 lg:grid-cols-2 gap-10 px-4 lg:px-0">
