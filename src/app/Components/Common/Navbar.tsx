@@ -18,9 +18,9 @@ const {saved,plan}:StateTypes=useContext(PlaneContext);
   </>
 
   return (
-    <div className=' sticky text-white border-b border-gray-700  bg-[#0c0d10]'>
+    <div className='  text-white border-b border-gray-700  bg-[#0c0d10]'>
 
- <div className="navbar container mx-auto">
+ <div className="navbar container mx-auto sticky ">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
