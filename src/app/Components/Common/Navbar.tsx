@@ -41,20 +41,24 @@ const {saved,plan}:StateTypes=useContext(PlaneContext);
     </ul>
   </div>
   <div className="navbar-end gap-2">
-    <h1>
+    
+
+   <Link className='flex gap-2' href={'/MyPlans'}> <h1 className='mt-0.5'>
       Plan
     </h1>
     <h1 className="font-bold px-3 py-1  bg-[#C2F800] text-black rounded-full">
      {plan.length}
-    </h1>
-    <h1>
+    </h1></Link>
+   <Link className='flex gap-2 ' href={'/MyPlans'}><h1 className='mt-0.5'>
       Saved
     </h1>
-    <h1 className="font-bold px-3 py-1  border border-gray-600 rounded-full">
+    <h1 className=" font-bold px-3 py-1  border border-gray-600 rounded-full">
      {saved.length}
     </h1>
+    </Link>
+    
    
-  </div>
+</div>
 </div>
     </div>
   );
