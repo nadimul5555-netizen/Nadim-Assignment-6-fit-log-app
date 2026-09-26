@@ -5,7 +5,7 @@ import ShowLibrary from '../Components/ShowLibrary';
 
 const FetchData = async () => {
 
-  const res = await fetch('https://api.abcz.workers.dev/api/fitlog');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
   const Data = await res.json();
   return Data
 }
@@ -18,7 +18,7 @@ const FetchData = async () => {
       <div className='container mx-auto'>
         <h1 className='font-bold text-3xl my-5'>THE LIBRARY</h1>
         <p className=' text-gray-500 '>Twelve lifts covering every major muscle group.</p>
-        <div className='grid grid-cols-3 gap-8 my-8'>
+        <div className='grid grid-cols-1 md:grid-cols-3 sm:mx-5  gap-8 my-8'>
         {
           UseData.map((Data:LibraryType)=> <ShowLibrary key={Data.id} Data={Data}></ShowLibrary>  )
         }

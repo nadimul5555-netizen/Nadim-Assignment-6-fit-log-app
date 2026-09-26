@@ -12,7 +12,7 @@ export type ShowLibraryProps = {
 const ShowLibrary = ({ Data }: ShowLibraryProps) => {
   
   return (
-    <div>
+    <div className="mx-3 lg:mx-0">
       <Link href={`/Workouts/${Data.id}`}>
       <div className="card   shadow-sm bg-[#191a25]">
   <figure>
