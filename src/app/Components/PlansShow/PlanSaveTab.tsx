@@ -1,12 +1,16 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import CalculatePlan from './Calculate';
 import CalculateSaved from './CalculateSaved';
 import PlanCard from '../Cards/PlanCard';
 import SavedCard from '../Cards/SavedCard';
+import { StateTypes } from '@/app/AllDataType';
+import { PlaneContext } from '@/app/Context/page';
+import NothingHere from '../Cards/NothingHere';
 
 const PlanSaveTab = () => {
     const [activeTab, setActiveTab] = useState("today");
+       const {plan,saved}:StateTypes=useContext(PlaneContext);
   return (
     <div>
 
@@ -54,7 +58,7 @@ const PlanSaveTab = () => {
         </div>
         <div>
           {
-            activeTab === "today"? <PlanCard></PlanCard>:<SavedCard></SavedCard>
+            activeTab === "today"?  plan.length >0? <PlanCard></PlanCard>:<NothingHere></NothingHere>:saved.length>0?<SavedCard></SavedCard>:<NothingHere></NothingHere>
           }
         </div>
     </div>
